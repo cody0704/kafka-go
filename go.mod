@@ -1,4 +1,4 @@
-module github.com/segmentio/kafka-go
+module github.com/cody0704/kafka-go
 
 go 1.15
 
