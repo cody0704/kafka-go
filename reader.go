@@ -32,6 +32,7 @@ const (
 )
 
 var (
+	CurrentBroker string = ""
 	errOnlyAvailableWithGroup = errors.New("unavailable when GroupID is not set")
 	errNotAvailableWithGroup  = errors.New("unavailable when GroupID is set")
 )
@@ -944,6 +945,8 @@ func (r *Reader) ReadLag(ctx context.Context) (lag int64, err error) {
 			if conn, err = r.config.Dialer.DialLeader(ctx, "tcp", broker, r.config.Topic, r.config.Partition); err != nil {
 				continue
 			}
+
+			CurrentBroker = broker
 
 			deadline, _ := ctx.Deadline()
 			conn.SetDeadline(deadline)
